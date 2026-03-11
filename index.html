@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rizkhan Travels & Tours | Premium Air Ticketing</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- BASE STYLES --- */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            /* Premium Background Image */
+            background: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2074&auto=format&fit=crop') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+            scroll-behavior: smooth;
+        }
+        .overlay {
+            background-color: rgba(0, 0, 0, 0.4); 
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* --- GLASSMORPHISM UTILITY --- */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 40px;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            width: 100%;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .logo { font-size: 24px; font-weight: 700; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        .logo i { color: #ff4b4b; }
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            margin-left: 20px;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: #ff4b4b; }
+
+        /* --- LAYOUT --- */
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            margin: 40px auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .section-subtitle {
+            text-align: center;
+            color: #ccc;
+            margin-bottom: 40px;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero { text-align: center; margin-top: 60px; margin-bottom: 60px; }
+        .hero h1 { font-size: 4em; margin: 0; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+        .hero p { font-size: 1.2em; font-weight: 300; max-width: 600px; margin: 20px auto; }
+
+        /* --- BOOKING FORM --- */
+        .booking-form { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .form-group { display: flex; flex-direction: column; }
+        .form-group.full-width { grid-column: span 2; }
+        label { font-size: 0.9em; font-weight: 500; margin-bottom: 8px; color: #eee; }
+        input, select {
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            outline: none;
+            transition: 0.3s;
+        }
+        input:focus, select:focus { background: rgba(255, 255, 255, 0.15); border-color: #ff4b4b; }
+        input::placeholder { color: rgba(255,255,255,0.5); }
+        option { color: #333; }
+        .radio-group { display: flex; gap: 20px; margin-bottom: 15px; }
+        .radio-group input { width: auto; margin-right: 5px; }
+
+        .btn {
+            background: linear-gradient(135deg, #ff4b4b, #d80032);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+            display: inline-block;
+            text-decoration: none;
+            width: 100%;
+        }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255, 75, 75, 0.4); }
+
+        /* --- DESTINATIONS GRID --- */
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 60px; }
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: 0.3s;
+        }
+        .card:hover { transform: translateY(-10px); background: rgba(255, 255, 255, 0.15); }
+        .card img { width: 100%; height: 200px; object-fit: cover; }
+        .card-content { padding: 20px; }
+        .card-content h3 { margin: 0 0 10px 0; }
+        .card-content p { color: #ccc; font-size: 0.9em; margin-bottom: 15px; }
+
+        /* --- FEATURES --- */
+        .features { text-align: center; }
+        .features i { font-size: 3em; color: #ff4b4b; margin-bottom: 15px; }
+
+        /* --- CONTACT & FOOTER --- */
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .contact-item { display: flex; align-items: center; gap: 15px; font-size: 1.1em; margin-bottom: 20px; }
+        .contact-item i { color: #ff4b4b; font-size: 1.5em; width: 30px; text-align: center; }
+        
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            margin-top: auto;
+            font-size: 0.9em;
+            color: #aaa;
+        }
+
+        /* --- ANIMATIONS --- */
+        .hidden { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .show { opacity: 1; transform: translateY(0); }
+
+        /* --- MOBILE RESPONSIVENESS --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5em; }
+            .booking-form, .grid-3, .contact-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; } 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="overlay">
+        
+        <nav>
+            <div class="nav-container">
+                <a href="#" class="logo"><i class="fa-solid fa-plane-departure"></i> RIZKHAN TRAVELS</a>
+                <div class="nav-links">
+                    <a href="#home">Home</a>
+                    <a href="#destinations">Destinations</a>
+                    <a href="#book">Book a Flight</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+
+            <div id="home" class="hero hidden">
+                <h1>Explore the World With Us</h1>
+                <p>Premium airline ticket booking and travel planning from Akkaraipattu to the globe. Experience luxury, affordability, and seamless journeys.</p>
+                <a href="#book" class="btn" style="width: auto;">Start Your Journey</a>
+            </div>
+
+            <div class="grid-3 features hidden" style="margin-top: 50px;">
+                <div class="glass-panel">
+                    <i class="fa-solid fa-tags"></i>
+                    <h3>Best Prices</h3>
+                    <p>We guarantee the most competitive rates for all international and domestic flights.</p>
+                </div>
+                <div class="glass-panel">
+                    <i class="fa-solid fa-headset"></i>
+                    <h3>24/7 Support</h3>
+                    <p>Our travel agents are always on standby to assist you with your booking needs.</p>
+                </div>
+                <div class="glass-panel">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <h3>Secure Booking</h3>
+                    <p>Fast, reliable, and 100% secure ticketing process for your peace of mind.</p>
+                </div>
+            </div>
+
+            <div id="book" class="glass-panel hidden" style="margin-bottom: 60px;">
+                <h2 class="section-title">Search Flights <i class="fa-solid fa-plane"></i></h2>
+                <p class="section-subtitle">Fill in your details and let our experts find the perfect itinerary.</p>
+                
+                <form action="https://formsubmit.co/thaseefthaseef@gmail.com" method="POST">
+                    
+                    <input type="hidden" name="_subject" value="New Flight Booking Request! ✈️">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+
+                    <div class="form-group full-width radio-group">
+                        <label><input type="radio" name="Trip_Type" value="One Way" checked> One Way</label>
+                        <label><input type="radio" name="Trip_Type" value="Round Trip"> Round Trip</label>
+                    </div>
+
+                    <div class="booking-form">
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-location-dot"></i> Flying From</label>
+                            <input type="text" name="Origin" placeholder="City or Airport (e.g. Colombo)" required>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-map-location-dot"></i> Flying To</label>
+                            <input type="text" name="Destination" placeholder="City or Airport (e.g. Dubai)" required>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-calendar-days"></i> Departure Date</label>
+                            <input type="date" name="Travel_Date" required>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-users"></i> Passengers</label>
+                            <input type="number" name="Passengers" min="1" max="10" value="1" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <label><i class="fa-solid fa-gem"></i> Travel Class</label>
+                            <select name="Flight_Class">
+                                <option value="Economy Class">Economy Class</option>
+                                <option value="Business Class">Business Class</option>
+                                <option value="First Class">First Class</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-user"></i> Customer Name</label>
+                            <input type="text" name="Customer_Name" placeholder="Your Full Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-phone"></i> Phone Number</label>
+                            <input type="tel" name="Phone_Number" placeholder="Your Phone Number" required>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <button type="submit" class="btn">Search Available Flights</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div id="destinations" class="hidden">
+                <h2 class="section-title">Popular Destinations</h2>
+                <p class="section-subtitle">Discover our most requested travel packages and flight routes.</p>
+                
+                <div class="grid-3">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=500" alt="Dubai">
+                        <div class="card-content">
+                            <h3>Dubai, UAE</h3>
+                            <p>Experience luxury shopping, ultramodern architecture, and a lively nightlife scene.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=500" alt="Maldives">
+                        <div class="card-content">
+                            <h3>The Maldives</h3>
+                            <p>Relax in pristine white-sand beaches and crystal-clear waters. Perfect for getaways.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=500" alt="Singapore">
+                        <div class="card-content">
+                            <h3>Singapore</h3>
+                            <p>Explore the stunning Gardens by the Bay and world-class culinary experiences.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="contact" class="glass-panel hidden" style="margin-bottom: 60px;">
+                <h2 class="section-title">Get in Touch</h2>
+                <p class="section-subtitle">Visit our office in Akkaraipattu or call us for immediate booking assistance.</p>
+                
+                <div class="contact-grid">
+                    <div>
+                        <div class="contact-item">
+                            <i class="fa-solid fa-location-crosshairs"></i>
+                            <div>
+                                <strong>Head Office</strong><br>
+                                128, Main Street, Akkaraipattu
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fa-solid fa-phone-volume"></i>
+                            <div>
+                                <strong>Hotlines</strong><br>
+                                077 0519237 / 075 0546002
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fa-solid fa-envelope"></i>
+                            <div>
+                                <strong>Email Us</strong><br>
+                                bookings@rizkhantravels.com
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 style="margin-top: 0; color: #ff4b4b;">Business Hours</h3>
+                        <p>Monday - Saturday: 8:00 AM - 8:00 PM<br>Sunday: Closed (Available for emergencies)</p>
+                        <br>
+                        <div style="font-size: 1.5em; display: flex; gap: 15px;">
+                            <i class="fa-brands fa-facebook" style="cursor: pointer; transition: 0.3s;"></i>
+                            <i class="fa-brands fa-whatsapp" style="cursor: pointer; transition: 0.3s;"></i>
+                            <i class="fa-brands fa-instagram" style="cursor: pointer; transition: 0.3s;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+        <footer>
+            <p>&copy; 2026 Rizkhan Travels & Tours. All Rights Reserved. | Designed for Premium Travel Experiences.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        });
+
+        const hiddenElements = document.querySelectorAll('.hidden');
+        hiddenElements.forEach((el) => observer.observe(el));
+    </script>
+</body>
+</html>
